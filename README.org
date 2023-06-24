@@ -1,0 +1,24 @@
+#+title: COILS
+
+A type-based component map.
+
+COILS provides a data structure that can efficiently store and query type-based components.
+
+#+begin_src rust
+#[derive(Debug, PartialEq, Eq)]
+struct MyComponent(usize);
+impl Component for MyComponent {}
+
+let my_entity_a = MyComponent(1);
+let my_entity_b = MyComponent(10);
+let my_entity_c = MyComponent(100);
+
+let mut world = World::new();
+
+world.insert_entity(my_entity_a);
+world.insert_entity(my_entity_b);
+world.insert_entity(my_entity_c);
+
+let entities = world.get_entities::<MyComponent>();
+assert_eq!(entities, vec![&MyComponent(1), &MyComponent(10), &MyComponent(100)]);
+#+end_src
